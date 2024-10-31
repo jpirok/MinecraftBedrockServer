@@ -334,6 +334,13 @@ Update_Sudoers() {
   fi
 }
 
+Add_Gamerules() {
+  if [ ! -f "gamerules" ]; then
+    echo "Adding default gamerules file..."
+    curl -H "Accept-Encoding: identity" -L -o gamerules.json https://raw.githubusercontent.com/TheRemote/MinecraftBedrockServer/master/gamerules
+  fi
+}
+
 ################################################################################################# End Functions
 
 # Check to make sure we aren't running as root
@@ -401,6 +408,9 @@ if [ -d "$ServerName" ]; then
 
   # Update Minecraft server scripts
   Update_Scripts
+
+  # Add the default gamerules file
+  Add_Gamerules
 
   # Service configuration
   Update_Service

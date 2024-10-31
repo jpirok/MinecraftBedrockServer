@@ -1,0 +1,7 @@
+showcoordinates true
+doweathercycle true
+pvp true
+playersSleepingPercentage 50
+keepInventory false
+respawnBlocksExplode false
+recipesUnlock false

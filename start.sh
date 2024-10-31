@@ -194,3 +194,15 @@ else
     echo "gawk application was not found -- timestamps will not be available in the logs.  Please delete SetupMinecraft.sh and run the script the new recommended way!"
 fi
 screen -L -Logfile logs/servername.$(date +%Y.%m.%d.%H.%M.%S).log -dmS servername /bin/bash -c "${BASH_CMD}"
+
+if [ ! -e dirname/minecraftbe/servername/gamerules]; then
+    touch dirname/minecraftbe/servername/gamerules
+fi
+
+# Apply the rules in the gamerules file to the running server.
+# See: https://minecraft.wiki/w/Game_rule
+# an example of the gamerules file is in the same directory as this script.
+while read -r line
+do
+	screen -rd servername -X stuff "gamerule $line $(printf '\r')"
+done < gamerules
